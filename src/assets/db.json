@@ -6,9 +6,7 @@
       "lastname": "Фамилия1",
       "profession": "Повар1",
       "age": 22,
-      "mail": {
-        "1": "sdf"
-      },
+      "mail": "ghjgjhkghjgjkhh",
       "password": "password1"
     },
     {
@@ -17,11 +15,7 @@
       "lastname": "Фамилия2",
       "profession": "Повар2",
       "age": 23,
-      "mail": [
-        null,
-        null,
-        "jhjkhkjhkjhhgfhgfkjhkjhkjhkjh"
-      ],
+      "mail": "цук",
       "password": "password1"
     },
     {
@@ -30,9 +24,7 @@
       "lastname": "Фамилия3",
       "profession": "Повар3",
       "age": 24,
-      "mail": {
-        "3": "123"
-      },
+      "mail": "5765765675",
       "password": "password1"
     },
     {
@@ -41,13 +33,7 @@
       "lastname": "Фамилия4",
       "profession": "Повар4",
       "age": 25,
-      "mail": [
-        null,
-        null,
-        null,
-        null,
-        "7777"
-      ],
+      "mail": "rttttds",
       "password": "password1"
     },
     {
@@ -56,10 +42,7 @@
       "lastname": "Фамилия5",
       "profession": "Повар5",
       "age": 25,
-      "mail": {
-        "1": "sdf",
-        "5": "w"
-      },
+      "mail": "nbmnbmnbnm",
       "password": "password1"
     },
     {
@@ -68,9 +51,7 @@
       "lastname": "Фамилия6",
       "profession": "Повар6",
       "age": 26,
-      "mail": {
-        "6": "were"
-      },
+      "mail": "mail1",
       "password": "password1"
     },
     {
@@ -79,9 +60,7 @@
       "lastname": "Фамилия7",
       "profession": "Повар7",
       "age": 27,
-      "mail": {
-        "7": "eeeee"
-      },
+      "mail": "mail1",
       "password": "password1"
     },
     {
@@ -90,9 +69,7 @@
       "lastname": "Фамилия8",
       "profession": "Повар8",
       "age": 28,
-      "mail": {
-        "8": "kljlk"
-      },
+      "mail": "mail1",
       "password": "password1"
     },
     {
@@ -101,9 +78,7 @@
       "lastname": "Фамилия9",
       "profession": "Повар9",
       "age": 29,
-      "mail": {
-        "9": "opoiop"
-      },
+      "mail": "mail1",
       "password": "password1"
     },
     {

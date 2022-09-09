@@ -17,9 +17,11 @@
             <td id="last">{{item.lastname}}</td>
             <td>{{item.profession}}</td>
             <td>{{item.age}}</td>
-            <td class="table-box__mail">        
-              <label class="table-box__mail-label" for="newMail">{{item.mail}}</label>
-              <input class="table-box__mail-input" type="text" name="" id="newMail" v-model="newMail[item.id]" :placeholder="item.mail" :class="{ disabled: isActiveInput !== item.id }" >
+            <td class="table-box__mail-wrap"> 
+              <div class="table-box__mail">
+                <label class="table-box__mail-label" for="newMail">{{item.mail}}</label>
+                <input class="table-box__mail-input" type="text" name="" id="newMail" v-model="newMail" :placeholder="item.mail" :class="{ disabled: isActiveInput !== item.id }" >
+              </div>       
               <button @click="changeItem(item.id)">изменить</button>
               <button @click="saveMail(item.id, item.name, item.lastname, item.profession, item.age, item.mail, item.password)">сохранить</button>
               </td>
@@ -77,13 +79,12 @@ export default {
       mail: '',
       password: '',
       isActiveInput: false,
-      newMail: {}, //разобраться почему объект а не строка
+      newMail: '',
     
     }
   },
   mounted(){
     this.getItem();
-
   },
   methods: {
       getItem(){
@@ -91,7 +92,7 @@ export default {
       .get('http://localhost:3001/items')
       .then(response => (this.items = response.data));
       },
-
+    
       postItem() {
         const newItem = {
           'id': Date.now(),
@@ -116,9 +117,7 @@ export default {
         this.isActiveInput = id;
       },
       saveMail(id, name, lastname, profession, age, mail, password){
-        console.log(this.newMail)
         mail = this.newMail
-        console.log(mail)
         const updateMail = {
           'id': id,
           'name': name,
@@ -129,20 +128,18 @@ export default {
           'password': password
         }
 
-         axios.put(`http://localhost:3001/items/${id}`, updateMail)
+         axios.patch(`http://localhost:3001/items/${id}`, updateMail)
           .then((response) => {
             console.log(response)
             console.log(updateMail)
+
           })
           .catch((error) => {
             console.log(error.response.data);
           });
-          // this.items.push(updateMail)
-          this.$forceUpdate(); // выглядит как костыль, разобраться как не делать принудительную перезагрузку
+          // this.$forceUpdate(); // выглядит как костыль, разобраться как не делать принудительную перезагрузку
       }
   }
-    
-  
 }
 </script>
 
@@ -159,24 +156,28 @@ export default {
     width: 50%;
     border: 1px solid green;
   }
-  table input.disabled {
+  .disabled {
     pointer-events: none;
     background: transparent;
     outline: none;
     border: none;
+    visibility: hidden;
   }
-  .table-box__mail {
+  /* .table-box__mail {
     position: relative;
+    width: 200px;
+    height: 20px;
   }
-  /* .table-box__mail-input{
+  .table-box__mail-input{
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
   }
-  .table-box__mail-input.disabled{
-    z-index: 3;
+  .table-box__mail-input::placeholder{
+    z-index: 4;
+    background: white;
   }
   .table-box__mail-label{
     position: absolute;
@@ -185,5 +186,6 @@ export default {
     right: 0;
     bottom: 0;
     z-index: 2;
+    visibility: visible;
   } */
 </style>
