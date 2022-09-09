@@ -1,0 +1,128 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Имя1",
+      "lastname": "Фамилия1",
+      "profession": "Повар1",
+      "age": 22,
+      "mail": {
+        "1": "sdf"
+      },
+      "password": "password1"
+    },
+    {
+      "id": 2,
+      "name": "Имя2",
+      "lastname": "Фамилия2",
+      "profession": "Повар2",
+      "age": 23,
+      "mail": [
+        null,
+        null,
+        "jhjkhkjhkjhhgfhgfkjhkjhkjhkjh"
+      ],
+      "password": "password1"
+    },
+    {
+      "id": 3,
+      "name": "Имя3",
+      "lastname": "Фамилия3",
+      "profession": "Повар3",
+      "age": 24,
+      "mail": {
+        "3": "123"
+      },
+      "password": "password1"
+    },
+    {
+      "id": 4,
+      "name": "Имя4",
+      "lastname": "Фамилия4",
+      "profession": "Повар4",
+      "age": 25,
+      "mail": [
+        null,
+        null,
+        null,
+        null,
+        "7777"
+      ],
+      "password": "password1"
+    },
+    {
+      "id": 5,
+      "name": "Имя5",
+      "lastname": "Фамилия5",
+      "profession": "Повар5",
+      "age": 25,
+      "mail": {
+        "1": "sdf",
+        "5": "w"
+      },
+      "password": "password1"
+    },
+    {
+      "id": 6,
+      "name": "Имя6",
+      "lastname": "Фамилия6",
+      "profession": "Повар6",
+      "age": 26,
+      "mail": {
+        "6": "were"
+      },
+      "password": "password1"
+    },
+    {
+      "id": 7,
+      "name": "Имя7",
+      "lastname": "Фамилия7",
+      "profession": "Повар7",
+      "age": 27,
+      "mail": {
+        "7": "eeeee"
+      },
+      "password": "password1"
+    },
+    {
+      "id": 8,
+      "name": "Имя8",
+      "lastname": "Фамилия8",
+      "profession": "Повар8",
+      "age": 28,
+      "mail": {
+        "8": "kljlk"
+      },
+      "password": "password1"
+    },
+    {
+      "id": 9,
+      "name": "Имя9",
+      "lastname": "Фамилия9",
+      "profession": "Повар9",
+      "age": 29,
+      "mail": {
+        "9": "opoiop"
+      },
+      "password": "password1"
+    },
+    {
+      "id": 10,
+      "name": "Имя10",
+      "lastname": "Фамилия10",
+      "profession": "Повар10",
+      "age": 30,
+      "mail": "mail1",
+      "password": "password1"
+    },
+    {
+      "id": 11,
+      "name": "Имя11",
+      "lastname": "Фамилия11",
+      "profession": "Повар11",
+      "age": 31,
+      "mail": "mail1",
+      "password": "password1"
+    }
+  ]
+}
