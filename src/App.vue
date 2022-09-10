@@ -46,7 +46,6 @@
         <div class="form__item">
           <label for="name">Name</label>
           <input type="text" name="" id="name" v-model="name">
-          <span>{{this.name}}</span>
         </div>
         <div class="form__item">
           <label for="lastname">LastName</label>
@@ -162,11 +161,12 @@ export default {
           .then((response) => {
             console.log(response)
             console.log(updateMail)
+            this.getItem(); // выглядит как костыль
           })
           .catch((error) => {
             console.log(error.response.data);
           });
-          // this.$forceUpdate(); // выглядит как костыль, разобраться как не делать принудительную перезагрузку
+          
       },
       nextPage() {
         this.pageNumber++;
