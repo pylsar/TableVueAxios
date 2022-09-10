@@ -1,5 +1,8 @@
 <template>
   <div class="table-box">
+    <div>
+      <input type="text" v-model="search" placeholder="поиск по имени"/>
+    </div>
     <table>
       <thead>
         <tr>
@@ -12,7 +15,7 @@
         </tr>
       </thead>
       <tbody >
-        <tr v-for="(item) in items" :key="item.id">
+        <tr v-for="(item) in paginatedData" :key="item.id">
             <td>{{item.name}}</td>
             <td id="last">{{item.lastname}}</td>
             <td>{{item.profession}}</td>
@@ -28,6 +31,10 @@
             <td>{{item.password}}</td>
         </tr>
       </tbody> 
+      <div class="list__btn-bottom">
+        <button @click="prevPage" :disabled="pageNumber === 0">left</button>
+        <button @click="nextPage" :disabled="pageNumber >= pageCount - 1">right</button>
+      </div>
     </table>  
     <form>
       <span>{{newMail}}</span>
@@ -80,11 +87,30 @@ export default {
       password: '',
       isActiveInput: false,
       newMail: '',
+      pageNumber: 0,
+      size: 5,
+      search:'',
     
     }
   },
   mounted(){
     this.getItem();
+  },
+  computed: {
+    pageCount() {
+      return Math.ceil(this.items.length / this.size);
+    },
+    paginatedData() {
+      return this.searchData.slice(
+        this.pageNumber * this.size,
+        this.pageNumber * this.size + this.size
+      );
+    },
+    searchData() {
+      return this.items.filter((item) => {
+        return item.name.toLowerCase().includes(this.search.toLowerCase());
+      });
+    },
   },
   methods: {
       getItem(){
@@ -114,7 +140,7 @@ export default {
           this.items.push(newItem)
       },
       changeItem(id){
-        this.isActiveInput = id;
+        this.isActiveInput = id
       },
       saveMail(id, name, lastname, profession, age, mail, password){
         mail = this.newMail
@@ -138,7 +164,14 @@ export default {
             console.log(error.response.data);
           });
           // this.$forceUpdate(); // выглядит как костыль, разобраться как не делать принудительную перезагрузку
-      }
+      },
+      nextPage() {
+        this.pageNumber++;
+      },
+      prevPage() {
+        this.pageNumber--;
+      },
+      
   }
 }
 </script>
