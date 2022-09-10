@@ -6,7 +6,7 @@
       "lastname": "Фамилия1",
       "profession": "Повар1",
       "age": 22,
-      "mail": "111111111111",
+      "mail": "jkhgkjghkhkhkj",
       "password": "password1"
     },
     {
@@ -15,7 +15,7 @@
       "lastname": "Фамилия2",
       "profession": "Повар2",
       "age": 23,
-      "mail": "цук",
+      "mail": "12341212341",
       "password": "password1"
     },
     {
@@ -33,7 +33,7 @@
       "lastname": "Фамилия4",
       "profession": "Повар4",
       "age": 25,
-      "mail": "rttttds",
+      "mail": "56r",
       "password": "password1"
     },
     {
@@ -98,6 +98,15 @@
       "age": 31,
       "mail": "mail1",
       "password": "password1"
+    },
+    {
+      "id": 1662789718169,
+      "name": "",
+      "lastname": "",
+      "profession": "",
+      "age": null,
+      "mail": "",
+      "password": ""
     }
   ]
 }
