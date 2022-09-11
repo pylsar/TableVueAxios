@@ -21,19 +21,24 @@
               <td>{{item.lastname}}</td>
               <td>{{item.profession}}</td>
               <td>{{item.age}}</td>
-              <td class="table-box__mail-wrap">
-                <div class="table-box__mail">
-                  <label  class="table-box__mail-label" for="newMail">{{item.mail}}</label>
-                  <!-- <label v-if="showNewMail" class="table-box__mail-label" for="newMail" :placeholder="item.newMail">{{this.newMail}}</label> -->
-                  <input class="table-box__mail-input" type="text" name="" id="newMail" v-model="newMail" :placeholder="item.mail" :class="{ disabled: isActiveInput !== item.id }" >
+              <td class="table-box__item-wrap">
+                <div class="table-box__item">
+                  <label  class="table-box__item-label" for="newMail">{{item.mail}}</label>
+                  <input class="table-box__item-input" type="text" name="" id="newMail" v-model="newMail" :placeholder="item.mail" :class="{ disabled: isActiveMail !== item.id }" >
                 </div>       
-                <button @click="changeItem(item.id)">изменить</button>
+                <button @click="changeMail(item.id)">изменить</button>
                 <button @click="saveMail(item.id, item.name, item.lastname, item.profession, item.age, item.mail, item.password)">сохранить</button>
               </td>
-              <td>{{item.password}}</td>
+              <td class="table-box__item-wrap">
+                <div class="table-box__item">
+                  <label class="table-box__item-label" for="newPassword">{{item.password}}</label>
+                  <input class="table-box__item-input" type="text" name="" id="newPassword" v-model="newPassword" :placeholder="item.password" :class="{ disabled: isActivePassword !== item.id }" >
+                </div>       
+                <button @click="changePassword(item.id)">изменить</button>
+                <button @click="savePassword(item.id, item.name, item.lastname, item.profession, item.age, item.mail, item.password)">сохранить</button>
+              </td>
           </tr>
         </tbody> 
-
       </table> 
       <div class="pagination">
         <button @click="prevPage" :disabled="pageNumber === 0" class="btn">left</button>
@@ -86,8 +91,10 @@ export default {
       age: null,
       mail: '',
       password: '',
-      isActiveInput: false,
+      isActiveMail: false,
+      isActivePassword: false,
       newMail: '',
+      newPassword: '',
       pageNumber: 0,
       size: 5,
       search:'',
@@ -142,8 +149,11 @@ export default {
           });
           this.items.push(newItem)
       },
-      changeItem(id){
-        this.isActiveInput = id
+      changeMail(id){
+        this.isActiveMail = id
+      },
+      changePassword(id){
+        this.isActivePassword = id
       },
       saveMail(id, name, lastname, profession, age, mail, password){
         mail = this.newMail
@@ -161,6 +171,29 @@ export default {
           .then((response) => {
             console.log(response)
             console.log(updateMail)
+            this.getItem(); // выглядит как костыль
+          })
+          .catch((error) => {
+            console.log(error.response.data);
+          });
+          
+      },
+      savePassword(id, name, lastname, profession, age, mail, password){
+        password = this.newPassword
+        const updatePassword = {
+          'id': id,
+          'name': name,
+          'lastname': lastname,
+          'profession': profession,
+          'age': age,
+          'mail': mail,
+          'password': password
+        }
+
+         axios.patch(`http://localhost:3001/items/${id}`, updatePassword)
+          .then((response) => {
+            console.log(response)
+            console.log(updatePassword)
             this.getItem(); // выглядит как костыль
           })
           .catch((error) => {
