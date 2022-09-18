@@ -1,7 +1,45 @@
 <template>
   <section class="container">
-    <div class="search">
-      <input type="text" v-model="search" placeholder="введите имя"/>
+    <h1>Таблица</h1>  
+    <div class="head">
+      <button @click="addUser" class="add-user">
+        
+        <span v-if="isModal">отменить добавление</span>
+        <span v-else>Добавить сотрудника</span>
+      </button>
+      <div class="search">
+        <input type="text" v-model="search" placeholder="введите имя"/>
+      </div>
+      <div v-if="isModal" class="form__box">
+        <h2>Добавить сотрудника</h2>  
+        <form class="form">
+          <div class="form__item">
+            <label for="name">Name</label>
+            <input type="text" name="" id="name" v-model="name">
+          </div>
+          <div class="form__item">
+            <label for="lastname">LastName</label>
+            <input type="text" name="" id="lastname" v-model="lastname">
+          </div>
+          <div class="form__item">
+            <label for="profession">Profession</label>
+            <input type="text" name="" id="profession" v-model="profession">
+          </div>
+          <div class="form__item">
+            <label for="age">Age</label>
+            <input type="number" name="" id="age" v-model="age">
+          </div>
+          <div class="form__item">
+            <label for="mail">Mail</label>
+            <input type="mail" name="" id="mail" v-model="mail">
+          </div>
+          <div class="form__item">
+            <label for="password">Password</label>
+            <input type="password" name="" id="password" v-model="password">
+          </div>
+          <button @click.prevent="postItem" class="btn">добавить</button>
+        </form>
+      </div>
     </div>
     <div class="table-box">
       <table>
@@ -46,40 +84,11 @@
         </tbody> 
       </table> 
       <div class="pagination">
-        <button @click="prevPage" :disabled="pageNumber === 0" class="btn">left</button>
-        <button @click="nextPage" :disabled="pageNumber >= pageCount - 1" class="btn">right</button>
+        <button @click="prevPage" :disabled="pageNumber === 0" class="btn">назад</button>
+        <button @click="nextPage" :disabled="pageNumber >= pageCount - 1" class="btn">вперед</button>
       </div> 
     </div>
-    <div class="form__box">
-      <h1>Добавить сотрудника</h1>  
-      <form class="form">
-        <div class="form__item">
-          <label for="name">Name</label>
-          <input type="text" name="" id="name" v-model="name">
-        </div>
-        <div class="form__item">
-          <label for="lastname">LastName</label>
-          <input type="text" name="" id="lastname" v-model="lastname">
-        </div>
-        <div class="form__item">
-          <label for="profession">Profession</label>
-          <input type="text" name="" id="profession" v-model="profession">
-        </div>
-        <div class="form__item">
-          <label for="age">Age</label>
-          <input type="number" name="" id="age" v-model="age">
-        </div>
-        <div class="form__item">
-          <label for="mail">Mail</label>
-          <input type="mail" name="" id="mail" v-model="mail">
-        </div>
-        <div class="form__item">
-          <label for="password">Password</label>
-          <input type="password" name="" id="password" v-model="password">
-        </div>
-        <button @click.prevent="postItem" class="btn">add new Item</button>
-      </form>
-    </div>
+
   </section>
 </template>
 
@@ -103,6 +112,7 @@ export default {
       pageNumber: 0,
       size: 5,
       search:'',
+      isModal: false,
     }
   },
   mounted(){
@@ -153,6 +163,7 @@ export default {
             console.log(error.response.data);
           });
           this.items.push(newItem)
+          this.isModal = false
       },
       changeMail(id){
         this.isActiveMail = id
@@ -213,6 +224,9 @@ export default {
       prevPage() {
         this.pageNumber--;
       },
+      addUser(){
+        this.isModal = !this.isModal
+      }
       
   }
 }
@@ -229,10 +243,35 @@ export default {
   max-width: 90vw;
   margin-left: auto;
   margin-right: auto;
-}/*поиск*/
+}
+h1{
+  margin-top: 48px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.head{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 49px;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+.add-user{
+  border: none;
+  outline: none;
+  background: #0288d1;
+  cursor: pointer;
+  width: 120px;
+  height: 100%;
+  color: white;
+  border-radius: 6px;
+}
+/*поиск*/
 .search{
   max-width: 500px;
-  margin: 24px auto;
 }
 .search input{
     box-shadow: 0px 3px 12px rgb(0 0 0 / 13%);
@@ -254,9 +293,14 @@ export default {
 }
 
 /*таблица*/
+table{
+  border-spacing: 0px;
+  border-collapse: collapse;
+}
 .table-box{
   display: flex;
   flex-direction: column;
+  margin-top: 48px;
 }
 .table-box thead tr{
   background: #e6f3fa;
@@ -362,7 +406,7 @@ export default {
   background: #0288d1;
   cursor: pointer;
   margin: 12px;
-  width: 40px;
+  width: 70px;
   height: 40px;
   color: white;
   border-radius: 6px;
@@ -373,39 +417,67 @@ export default {
 }
 
 
-
-
-.form__box{
-  max-width: 500px;
-  margin: 24px auto;
+.table-box__add-user{
+  position: relative;
 }
 
-.form__box h1 {
+.form__box{
+  width: 500px;
+  height: 400px;
+  box-shadow: 0px 3px 12px rgb(0 0 0 / 13%);
+  border-radius: 6px;
+  position: absolute;
+  top: 49px;
+  left: 0;
+  z-index: 10;
+  background: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form__box h2 {
   text-align: center;
+  margin-bottom: 24px;
 }
 .form{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  padding: 0 24px;
 }
 .form__item{
   width: 100%;
   display: flex;
   justify-content:flex-start;
   align-items: center;
+  margin-bottom: 12px;
 }
 .form__item label{
-  min-width: 120px;
+  width: 100px;
 }
 .form__item input{
   flex: 1;
-  border: 1px solid skyblue;
-  outline: 1px solid skyblue;
-  height: 20px;
+  box-shadow: 0px 3px 12px rgb(0 0 0 / 13%);
+  border-radius: 6px;
+  height: 30px;
+  color: #000000;
+  border: none;
+  outline: none;
+  padding: 0 0 0 16px;
 }
 
+.search input::placeholder{
+  color: #999;
+  font-size: 15px;
+}
 
+.search input:focus::-webkit-input-placeholder {
+  color: transparent;
+}
 
 /*js*/
 
@@ -416,7 +488,4 @@ export default {
   border: none;
   visibility: hidden;
 }
-
-
-
 </style>
