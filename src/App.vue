@@ -17,25 +17,30 @@
         </thead>
         <tbody >
           <tr v-for="(item) in paginatedData" :key="item.id">
-              <td>{{item.name}}</td>
-              <td>{{item.lastname}}</td>
-              <td>{{item.profession}}</td>
-              <td>{{item.age}}</td>
-              <td class="table-box__item-wrap">
-                <div class="table-box__item">
-                  <label  class="table-box__item-label" for="newMail">{{item.mail}}</label>
-                  <input class="table-box__item-input" type="text" name="" id="newMail" v-model="newMail" :placeholder="item.mail" :class="{ disabled: isActiveMail !== item.id }" >
-                </div>       
-                <button @click="changeMail(item.id)">изменить</button>
-                <button @click="saveMail(item.id, item.name, item.lastname, item.profession, item.age, item.mail, item.password)">сохранить</button>
+              <td width="140px;">{{item.name}}</td>
+              <td width="140px;">{{item.lastname}}</td>
+              <td width="140px;">{{item.profession}}</td>
+              <td width="60px;">{{item.age}}</td>
+              <td width="260px;">
+                <div class="table-box__item-wrap">
+                  <div class="table-box__item">
+                    <label  class="table-box__item-label" for="newMail">{{item.mail}}</label>
+                    <input class="table-box__item-input" type="text" name="" id="newMail" v-model="newMail" :placeholder="item.mail" :class="{ disabled: isActiveMail !== item.id }" >
+                  </div>       
+                  <button @click="changeMail(item.id)" class="table-box__btn table-box__btn-change">	 </button>
+                  <button @click="saveMail(item.id, item.name, item.lastname, item.profession, item.age, item.mail, item.password)" class="table-box__btn table-box__btn-save"></button>
+                </div> 
               </td>
-              <td class="table-box__item-wrap">
-                <div class="table-box__item">
-                  <label class="table-box__item-label" for="newPassword">{{item.password}}</label>
-                  <input class="table-box__item-input" type="text" name="" id="newPassword" v-model="newPassword" :placeholder="item.password" :class="{ disabled: isActivePassword !== item.id }" >
-                </div>       
-                <button @click="changePassword(item.id)">изменить</button>
-                <button @click="savePassword(item.id, item.name, item.lastname, item.profession, item.age, item.mail, item.password)">сохранить</button>
+              <td width="260px;" >
+                <div class="table-box__item-wrap">
+                  <div class="table-box__item">
+                    <label class="table-box__item-label" for="newPassword">{{item.password}}</label>
+                    <input class="table-box__item-input" type="text" name="" id="newPassword" v-model="newPassword" :placeholder="item.password" :class="{ disabled: isActivePassword !== item.id }" >
+                  </div>       
+                  <button @click="changePassword(item.id)" class="table-box__btn table-box__btn-change"></button>
+                  <button @click="savePassword(item.id, item.name, item.lastname, item.profession, item.age, item.mail, item.password)" class="table-box__btn table-box__btn-save"></button>
+                </div>
+                
               </td>
           </tr>
         </tbody> 
@@ -167,16 +172,16 @@ export default {
           'password': password
         }
 
-         axios.patch(`http://localhost:3001/items/${id}`, updateMail)
-          .then((response) => {
-            console.log(response)
-            console.log(updateMail)
-            this.getItem(); // выглядит как костыль
-          })
-          .catch((error) => {
-            console.log(error.response.data);
-          });
-          
+        axios.patch(`http://localhost:3001/items/${id}`, updateMail)
+        .then((response) => {
+          console.log(response)
+          console.log(updateMail)
+          this.getItem(); // выглядит как костыль
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
+        this.isActiveMail = id = false
       },
       savePassword(id, name, lastname, profession, age, mail, password){
         password = this.newPassword
@@ -190,15 +195,16 @@ export default {
           'password': password
         }
 
-         axios.patch(`http://localhost:3001/items/${id}`, updatePassword)
-          .then((response) => {
-            console.log(response)
-            console.log(updatePassword)
-            this.getItem(); // выглядит как костыль
-          })
-          .catch((error) => {
-            console.log(error.response.data);
-          });
+        axios.patch(`http://localhost:3001/items/${id}`, updatePassword)
+        .then((response) => {
+          console.log(response)
+          console.log(updatePassword)
+          this.getItem(); // выглядит как костыль
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
+        this.isActivePassword = id = false
           
       },
       nextPage() {
@@ -223,8 +229,7 @@ export default {
   max-width: 90vw;
   margin-left: auto;
   margin-right: auto;
-  border: 1px solid red;
-}
+}/*поиск*/
 .search{
   max-width: 500px;
   margin: 24px auto;
@@ -248,7 +253,7 @@ export default {
   color: transparent;
 }
 
-
+/*таблица*/
 .table-box{
   display: flex;
   flex-direction: column;
@@ -256,43 +261,116 @@ export default {
 .table-box thead tr{
   background: #e6f3fa;
 }
-
 .table-box tr th:first-child, .table-box tr td:first-child{
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
-  border: 1px solid red;
-
 }
-
 .table-box tr th:last-child, .table-box tr td:last-child {
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
-  border: 1px solid red;
-
 }
-
-
 .table-box tbody tr:nth-child(even){
-  background: yellow;
+  background: #f0f0f0;
 }
 .table-box th {
   font-weight: 600;
   font-size: 16px;
   line-height: 18px;
   color: #000;
-  height: 30px;
-  text-align: left;
-  padding-left: 12px
+  height: 40px;
+  text-align: center;
 }
 .table-box td{
   font-weight: 400;
   font-size: 16px;
   line-height: 18px;
-  height: 30px;
+  height: 40px;
   padding-left: 12px;
 }
+.table-box__item-wrap{
+  display: flex;
+}
+.table-box__item{
+  flex: 1;
+  display: flex; 
+  position: relative;
+  margin-right: 12px;
+}
+.table-box__item label{
+  width: 100%;
+  height: 26px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right:0;
+  bottom:0;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+}
+.table-box__item input{
+  width: 100%;
+  height: 26px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right:0;
+  bottom:0;
+  background: white;
+  box-shadow: 0px 3px 12px rgb(0 0 0 / 13%);
+  border-radius: 6px;
+  color: #000000;
+  border: none;
+  outline: none;
+  transform: translateX(-6px);
+  padding: 0 6px;
+}
+.table-box__item input::placeholder{
+  font-size: 15px;
+  font-family: 'Times New Roman', Times, serif;
+}
+.table-box__item input:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+.table-box__btn{
+  width: 42px;
+  height: 26px;
+  padding: 6px;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  outline: none;
+  border-radius: 6px;
+  background-color: #ffdf37;
+  cursor: pointer;
+}
+.table-box__btn-change{
+  background-image: url('./assets/images/edit.png');
+}
+.table-box__btn-save{
+  background-image: url('./assets/images/save.png');
+}
 
-
+/*навигация */
+.pagination{
+  max-width: 500px;
+  margin: 0 auto;
+}
+.btn{
+  border: none;
+  outline: none;
+  background: #0288d1;
+  cursor: pointer;
+  margin: 12px;
+  width: 40px;
+  height: 40px;
+  color: white;
+  border-radius: 6px;
+}
+.btn:disabled{
+  background: gray;
+  cursor: default;
+}
 
 
 
@@ -326,20 +404,10 @@ export default {
   outline: 1px solid skyblue;
   height: 20px;
 }
-.pagination{
-  max-width: 500px;
-  margin: 0 auto;
-}
-.btn{
-  border: none;
-  outline: none;
-  background: skyblue;
-  cursor: pointer;
-  margin: 12px;
-  padding: 12px 24px;
-}
 
 
+
+/*js*/
 
 .disabled {
   pointer-events: none;
@@ -348,6 +416,7 @@ export default {
   border: none;
   visibility: hidden;
 }
+
 
 
 </style>

@@ -6,8 +6,8 @@
       "lastname": "Фамилия1",
       "profession": "Повар1",
       "age": 22,
-      "mail": "new mail",
-      "password": "new password"
+      "mail": "wer",
+      "password": "jlkjlk"
     },
     {
       "id": 2,
@@ -15,8 +15,8 @@
       "lastname": "Фамилия2",
       "profession": "Повар2",
       "age": 23,
-      "mail": "new mail 1",
-      "password": "new pas 2"
+      "mail": "111",
+      "password": "werwerwer2"
     },
     {
       "id": 3,
@@ -24,7 +24,7 @@
       "lastname": "Фамилия3",
       "profession": "Повар3",
       "age": 24,
-      "mail": "mail1",
+      "mail": "werwwww",
       "password": "password1"
     },
     {
