@@ -1,7 +1,7 @@
 <template>
   <section class="container">
     <div class="search">
-      <input type="text" v-model="search" placeholder="поиск по имени"/>
+      <input type="text" v-model="search" placeholder="введите имя"/>
     </div>
     <div class="table-box">
       <table>
@@ -213,25 +213,90 @@ export default {
 </script>
 
 <style>
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .container{
   max-width: 90vw;
   margin-left: auto;
   margin-right: auto;
+  border: 1px solid red;
 }
 .search{
   max-width: 500px;
   margin: 24px auto;
 }
 .search input{
-  height: 30px;
-  width: 100%;
-  border: 1px solid skyblue;
-  outline: 1px solid skyblue;
+    box-shadow: 0px 3px 12px rgb(0 0 0 / 13%);
+    border-radius: 6px;
+    height: 49px;
+    width: 490px;
+    color: #000000;
+    border: none;
+    outline: none;
+    padding: 0 0 0 16px;
 }
+.search input::placeholder{
+  color: #999;
+  font-size: 15px;
+}
+
+.search input:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+
+
 .table-box{
   display: flex;
   flex-direction: column;
 }
+.table-box thead tr{
+  background: #e6f3fa;
+}
+
+.table-box tr th:first-child, .table-box tr td:first-child{
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  border: 1px solid red;
+
+}
+
+.table-box tr th:last-child, .table-box tr td:last-child {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border: 1px solid red;
+
+}
+
+
+.table-box tbody tr:nth-child(even){
+  background: yellow;
+}
+.table-box th {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 18px;
+  color: #000;
+  height: 30px;
+  text-align: left;
+  padding-left: 12px
+}
+.table-box td{
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+  height: 30px;
+  padding-left: 12px;
+}
+
+
+
+
+
+
 .form__box{
   max-width: 500px;
   margin: 24px auto;
