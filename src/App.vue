@@ -12,6 +12,7 @@
       </div>
       <div v-if="isModal" class="form__box">
         <h2>Добавить сотрудника</h2>  
+        <span @click="this.isModal = false" class="close">&#10006;</span>
         <form class="form">
           <div class="form__item">
             <label for="name">Name</label>
@@ -42,51 +43,53 @@
       </div>
     </div>
     <div class="table-box">
-      <table>
-        <thead>
-          <tr>
-              <th>Имя</th>
-              <th>Фамилия</th>
-              <th>Профессия</th>
-              <th>Возраст</th>
-              <th>Почта</th>
-              <th>Пароль</th>
-          </tr>
-        </thead>
-        <tbody >
-          <tr v-for="(item) in paginatedData" :key="item.id">
-              <td width="140px;">{{item.name}}</td>
-              <td width="140px;">{{item.lastname}}</td>
-              <td width="140px;">{{item.profession}}</td>
-              <td width="60px;">{{item.age}}</td>
-              <td width="260px;">
-                <div class="table-box__item-wrap">
-                  <div class="table-box__item">
-                    <label  class="table-box__item-label" for="newMail">{{item.mail}}</label>
-                    <input class="table-box__item-input" type="text" name="" id="newMail" v-model="newMail" :placeholder="item.mail" :class="{ disabled: isActiveMail !== item.id }" >
-                  </div>       
-                  <button @click="changeMail(item.id)" class="table-box__btn table-box__btn-change">	 </button>
-                  <button @click="saveMail(item.id, item.name, item.lastname, item.profession, item.age, item.mail, item.password)" class="table-box__btn table-box__btn-save"></button>
-                </div> 
-              </td>
-              <td width="260px;" >
-                <div class="table-box__item-wrap">
-                  <div class="table-box__item">
-                    <label class="table-box__item-label" for="newPassword">{{item.password}}</label>
-                    <input class="table-box__item-input" type="text" name="" id="newPassword" v-model="newPassword" :placeholder="item.password" :class="{ disabled: isActivePassword !== item.id }" >
-                  </div>       
-                  <button @click="changePassword(item.id)" class="table-box__btn table-box__btn-change"></button>
-                  <button @click="savePassword(item.id, item.name, item.lastname, item.profession, item.age, item.mail, item.password)" class="table-box__btn table-box__btn-save"></button>
-                </div>
-                
-              </td>
-          </tr>
-        </tbody> 
-      </table> 
-      <div class="pagination">
-        <button @click="prevPage" :disabled="pageNumber === 0" class="btn">назад</button>
-        <button @click="nextPage" :disabled="pageNumber >= pageCount - 1" class="btn">вперед</button>
-      </div> 
+      <div class="table-box__scroll">
+        <table>
+          <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Профессия</th>
+                <th>Возраст</th>
+                <th>Почта</th>
+                <th>Пароль</th>
+            </tr>
+          </thead>
+          <tbody >
+            <tr v-for="(item) in paginatedData" :key="item.id">
+                <td width="140px;">{{item.name}}</td>
+                <td width="140px;">{{item.lastname}}</td>
+                <td width="140px;">{{item.profession}}</td>
+                <td width="60px;">{{item.age}}</td>
+                <td width="260px;">
+                  <div class="table-box__item-wrap">
+                    <div class="table-box__item">
+                      <label  class="table-box__item-label" for="newMail">{{item.mail}}</label>
+                      <input class="table-box__item-input" type="text" name="" id="newMail" v-model="newMail" :placeholder="item.mail" :class="{ disabled: isActiveMail !== item.id }" >
+                    </div>       
+                    <button @click="changeMail(item.id)" class="table-box__btn table-box__btn-change">	 </button>
+                    <button @click="saveMail(item.id, item.name, item.lastname, item.profession, item.age, item.mail, item.password)" class="table-box__btn table-box__btn-save"></button>
+                  </div> 
+                </td>
+                <td width="260px;" >
+                  <div class="table-box__item-wrap">
+                    <div class="table-box__item">
+                      <label class="table-box__item-label" for="newPassword">{{item.password}}</label>
+                      <input class="table-box__item-input" type="text" name="" id="newPassword" v-model="newPassword" :placeholder="item.password" :class="{ disabled: isActivePassword !== item.id }" >
+                    </div>       
+                    <button @click="changePassword(item.id)" class="table-box__btn table-box__btn-change"></button>
+                    <button @click="savePassword(item.id, item.name, item.lastname, item.profession, item.age, item.mail, item.password)" class="table-box__btn table-box__btn-save"></button>
+                  </div>
+                  
+                </td>
+            </tr>
+          </tbody> 
+        </table> 
+        <div class="pagination">
+          <button @click="prevPage" :disabled="pageNumber === 0" class="btn">назад</button>
+          <button @click="nextPage" :disabled="pageNumber >= pageCount - 1" class="btn">вперед</button>
+        </div> 
+      </div>
     </div>
 
   </section>
@@ -240,9 +243,9 @@ export default {
   box-sizing: border-box;
 }
 .container{
-  max-width: 90vw;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 h1{
   margin-top: 48px;
@@ -293,6 +296,7 @@ h1{
 }
 
 /*таблица*/
+
 table{
   border-spacing: 0px;
   border-collapse: collapse;
@@ -301,7 +305,34 @@ table{
   display: flex;
   flex-direction: column;
   margin-top: 48px;
+  overflow-x: auto;
+  transform: scaleY(-1); 
 }
+
+/* работает не во всех  браузерах */
+.table-box::-webkit-scrollbar {
+  height: 6px;
+  width: 10px;
+  border-radius: 6px;
+}
+.table-box::-webkit-scrollbar-track {
+  background-clip: content-box;   /* Важно */
+}
+.table-box::-webkit-scrollbar-thumb {
+  background: rgb(52,106,213);
+  border-radius: 6px;
+}
+/* end работает не во всех  браузерах*/
+.table-box__scroll{
+  transform: scaleY(-1);
+}
+.table-box__scroll table{
+  width: 100%;
+  min-width: 968px;
+  border-collapse: collapse;
+  cursor: all-scroll;
+}
+
 .table-box thead tr{
   background: #e6f3fa;
 }
@@ -397,7 +428,7 @@ table{
 
 /*навигация */
 .pagination{
-  max-width: 500px;
+  max-width: 190px;
   margin: 0 auto;
 }
 .btn{
@@ -470,13 +501,20 @@ table{
   padding: 0 0 0 16px;
 }
 
-.search input::placeholder{
+.form__item input::placeholder{
   color: #999;
   font-size: 15px;
 }
 
-.search input:focus::-webkit-input-placeholder {
+.form__item input:focus::-webkit-input-placeholder {
   color: transparent;
+}
+
+.close{
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  cursor: pointer;
 }
 
 /*js*/
@@ -487,5 +525,31 @@ table{
   outline: none;
   border: none;
   visibility: hidden;
+}
+
+
+
+/********ADAPTIVE**********/
+@media (max-width: 680px) {
+ .head{
+  flex-direction: column;
+  align-items: flex-start;
+  height: 122px;
+ }
+ .add-user{
+  order: 1;
+ }
+ .search{
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 24px;
+ }
+ .search input{
+  width: 100%;
+ }
+ .form__box{
+  top: 122px;
+  width: auto;
+ }
 }
 </style>

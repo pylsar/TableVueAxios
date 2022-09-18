@@ -6,8 +6,8 @@
       "lastname": "Фамилия1",
       "profession": "Повар1",
       "age": 22,
-      "mail": "wer",
-      "password": "jlkjlk"
+      "mail": "почта1",
+      "password": "пароль1"
     },
     {
       "id": 2,
@@ -15,8 +15,8 @@
       "lastname": "Фамилия2",
       "profession": "Повар2",
       "age": 23,
-      "mail": "111",
-      "password": "werwerwer2"
+      "mail": "почта2",
+      "password": "пароль2"
     },
     {
       "id": 3,
@@ -24,7 +24,7 @@
       "lastname": "Фамилия3",
       "profession": "Повар3",
       "age": 24,
-      "mail": "werwwww",
+      "mail": "почта3",
       "password": "password1"
     },
     {
@@ -98,33 +98,6 @@
       "age": 31,
       "mail": "mail1",
       "password": "password1"
-    },
-    {
-      "id": 1662904784362,
-      "name": "1",
-      "lastname": "2",
-      "profession": "3",
-      "age": 33,
-      "mail": "333",
-      "password": "3333"
-    },
-    {
-      "id": 1663508195952,
-      "name": "ту",
-      "lastname": "ц",
-      "profession": "у",
-      "age": 2123,
-      "mail": "123123",
-      "password": "123"
-    },
-    {
-      "id": 1663508256528,
-      "name": "",
-      "lastname": "",
-      "profession": "",
-      "age": null,
-      "mail": "",
-      "password": ""
     }
   ]
 }
